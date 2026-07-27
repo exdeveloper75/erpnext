@@ -1,4 +1,4 @@
-/* Unisoft desk theme */
+/* Unisoft desk — global UI theme */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
 
 :root {
@@ -6,14 +6,33 @@
 	--unisoft-slate: #1a2f3a;
 	--unisoft-teal: #1f8a7a;
 	--unisoft-teal-deep: #14685c;
+	--unisoft-teal-soft: rgba(31, 138, 122, 0.14);
 	--unisoft-mist: #e8f2f0;
-	--unisoft-surface: #f7fbfa;
+	--unisoft-surface: #f5f9f8;
+	--unisoft-border: rgba(15, 28, 36, 0.08);
+	--unisoft-shadow: 0 10px 28px rgba(15, 28, 36, 0.07);
+
 	--primary: var(--unisoft-teal);
+	--primary-color: var(--unisoft-teal);
 	--btn-primary: var(--unisoft-teal);
+	--blue-400: #3aa894;
 	--blue-500: var(--unisoft-teal);
 	--blue-600: var(--unisoft-teal-deep);
+	--blue-700: #0f544a;
+	--bg-color: var(--unisoft-surface);
+	--subtle-fg: #5b6b73;
+	--text-color: var(--unisoft-ink);
+	--heading-color: var(--unisoft-ink);
+	--border-color: var(--unisoft-border);
+	--card-bg: #ffffff;
+	--navbar-bg: var(--unisoft-ink);
+	--fg-color: #ffffff;
+	--control-bg: #ffffff;
+	--control-bg-on-gray: #ffffff;
+	--awesomplete-hover-bg: var(--unisoft-teal-soft);
 }
 
+/* ---------- Base ---------- */
 html,
 body,
 .desk,
@@ -21,80 +40,495 @@ body,
 .sidebar-menu,
 .list-row,
 .form-layout,
-.modal {
+.modal,
+.page-container,
+.workspace-container {
 	font-family: "DM Sans", system-ui, sans-serif !important;
 }
 
-.navbar {
-	background: linear-gradient(90deg, var(--unisoft-ink), var(--unisoft-slate)) !important;
+body.full-width,
+.desk-page,
+.layout-main-section,
+.page-body {
+	background: var(--unisoft-surface) !important;
+}
+
+h1,
+h2,
+h3,
+.page-title,
+.ellipsis.title-text,
+.workspace-title,
+.form-dashboard .section-head {
+	font-family: "Fraunces", Georgia, serif !important;
+	letter-spacing: -0.02em;
+	color: var(--unisoft-ink) !important;
+}
+
+a {
+	color: var(--unisoft-teal-deep);
+}
+
+a:hover {
+	color: var(--unisoft-teal);
+}
+
+/* ---------- Navbar ---------- */
+.navbar,
+header.navbar,
+.navbar.navbar-expand {
+	background: linear-gradient(90deg, var(--unisoft-ink) 0%, var(--unisoft-slate) 100%) !important;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+	min-height: 52px;
 }
 
 .navbar .nav-link,
 .navbar .navbar-brand,
-.navbar .es-icon {
+.navbar .es-icon,
+.navbar .dropdown-toggle,
+.navbar .search-bar,
+.navbar .notifications-icon,
+.navbar svg {
 	color: rgba(255, 255, 255, 0.92) !important;
+	fill: rgba(255, 255, 255, 0.92);
 }
 
+.navbar .search-bar,
+.navbar .input-group,
+.navbar input[type="search"],
+.navbar .awesomebar,
+.navbar #navbar-search,
+.navbar .form-control {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.12) !important;
+	border-radius: 10px !important;
+	color: #fff !important;
+}
+
+.navbar .form-control::placeholder {
+	color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* ---------- Sidebar ---------- */
 .sidebar-menu,
 .desk-sidebar,
-.body-sidebar {
-	background: #0f1c24 !important;
+.body-sidebar,
+.layout-side-section,
+.list-sidebar,
+.form-sidebar,
+.workspace-sidebar,
+.desk-sidebar-container {
+	background: var(--unisoft-ink) !important;
 	color: rgba(255, 255, 255, 0.88) !important;
+	border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.sidebar-menu a,
+.desk-sidebar a,
+.body-sidebar a,
+.standard-sidebar-label,
+.sidebar-item-label,
+.list-sidebar .sidebar-label,
+.form-sidebar .sidebar-label,
+.workspace-sidebar .item-anchor,
+.workspace-sidebar .sidebar-item-label {
+	color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.standard-sidebar-item,
+.sidebar-item-container,
+.workspace-sidebar .sidebar-item-container {
+	border-radius: 10px !important;
+	margin: 2px 8px !important;
 }
 
 .standard-sidebar-item.selected,
 .sidebar-item-container.selected,
-.standard-sidebar-item:hover {
-	background: rgba(31, 138, 122, 0.22) !important;
+.standard-sidebar-item:hover,
+.sidebar-item-container:hover,
+.workspace-sidebar .selected,
+.workspace-sidebar .sidebar-item-container:hover {
+	background: var(--unisoft-teal-soft) !important;
 }
 
+.standard-sidebar-item.selected .sidebar-item-label,
+.sidebar-item-container.selected .sidebar-item-label,
+.workspace-sidebar .selected .sidebar-item-label {
+	color: #fff !important;
+	font-weight: 600 !important;
+}
+
+/* ---------- Page head / breadcrumbs ---------- */
+.page-head,
+.page-head-content,
+.layout-main-section-wrapper .page-head {
+	background: transparent !important;
+	border: none !important;
+}
+
+.page-form,
+.page-head .btn-group,
+.filter-section {
+	gap: 8px;
+}
+
+.breadcrumb,
+.breadcrumb-item,
+.page-breadcrumbs a {
+	color: var(--subtle-fg) !important;
+}
+
+/* ---------- Buttons ---------- */
 .btn-primary,
 .btn.btn-primary,
 button.btn-primary,
-.es-button[data-variant="solid"] {
-	background: linear-gradient(180deg, var(--unisoft-teal), var(--unisoft-teal-deep)) !important;
+.es-button[data-variant="solid"],
+.primary-action,
+.btn-primary-dark {
+	background: linear-gradient(180deg, var(--unisoft-teal) 0%, var(--unisoft-teal-deep) 100%) !important;
 	border-color: transparent !important;
 	color: #fff !important;
 	border-radius: 10px !important;
+	box-shadow: 0 8px 18px rgba(20, 104, 92, 0.22) !important;
+	font-weight: 600 !important;
 }
 
-.btn-primary:hover {
-	filter: brightness(1.05);
+.btn-primary:hover,
+.btn.btn-primary:hover,
+.es-button[data-variant="solid"]:hover {
+	filter: brightness(1.06);
 }
 
-.page-head,
-.list-row-head,
-.form-dashboard-section,
-.widget,
-.card,
-.frappe-card {
-	border-radius: 14px !important;
+.btn-secondary,
+.btn-default,
+.btn-outline-primary,
+.es-button[data-variant="subtle"],
+.es-button[data-variant="outline"] {
+	border-radius: 10px !important;
+	border-color: var(--unisoft-border) !important;
+	background: #fff !important;
+	color: var(--unisoft-ink) !important;
 }
 
+.btn-outline-primary {
+	color: var(--unisoft-teal-deep) !important;
+	border-color: rgba(31, 138, 122, 0.35) !important;
+}
+
+.btn-outline-primary:hover {
+	background: var(--unisoft-teal-soft) !important;
+}
+
+/* ---------- Cards / widgets / workspace ---------- */
 .widget,
 .frappe-card,
-.form-section {
-	box-shadow: 0 8px 24px rgba(15, 28, 36, 0.06) !important;
-	border: 1px solid rgba(15, 28, 36, 0.06) !important;
+.card,
+.form-section,
+.form-dashboard-section,
+.workspace-card,
+.shortcut-widget-box,
+.number-widget-box,
+.links-widget-box,
+.dashboard-graph,
+.heatmap-chart,
+.codex-editor,
+.page-card {
+	background: #fff !important;
+	border: 1px solid var(--unisoft-border) !important;
+	border-radius: 16px !important;
+	box-shadow: var(--unisoft-shadow) !important;
 }
 
-.form-control:focus,
-.input-with-feedback:focus {
-	border-color: var(--unisoft-teal) !important;
-	box-shadow: 0 0 0 3px rgba(31, 138, 122, 0.18) !important;
+.widget .widget-head,
+.widget-title,
+.shortcut-content,
+.number-widget-box .widget-title {
+	color: var(--unisoft-ink) !important;
 }
 
+.number-widget-box .widget-body,
+.number-widget-box .widget-content {
+	color: var(--unisoft-teal-deep) !important;
+	font-weight: 700 !important;
+}
+
+.workspace .codex-editor__redactor,
+.workspace-sidebar .desk-sidebar-item {
+	border-radius: 12px;
+}
+
+/* ---------- Lists ---------- */
+.list-row-container,
+.list-row,
+.result,
+.list-paging-area {
+	background: transparent !important;
+}
+
+.list-row-head,
+.level.list-row-head {
+	background: #fff !important;
+	border: 1px solid var(--unisoft-border) !important;
+	border-radius: 12px !important;
+	box-shadow: none !important;
+	color: var(--subtle-fg) !important;
+	font-weight: 600 !important;
+}
+
+.list-row,
+.list-row-container .list-row {
+	border-radius: 10px !important;
+	margin: 4px 0 !important;
+	border: 1px solid transparent !important;
+	transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.list-row:hover,
+.list-row-container .list-row:hover {
+	background: #fff !important;
+	border-color: var(--unisoft-border) !important;
+	box-shadow: 0 4px 14px rgba(15, 28, 36, 0.05) !important;
+}
+
+.filter-button,
+.filter-section .btn,
+.sort-selector .btn,
+.list-row-check {
+	border-radius: 8px !important;
+}
+
+.tag-pill,
+.indicator-pill,
 .indicator-pill.blue,
 .indicator.blue {
-	background: rgba(31, 138, 122, 0.15) !important;
+	background: var(--unisoft-teal-soft) !important;
+	color: var(--unisoft-teal-deep) !important;
+	border-radius: 999px !important;
+	border: none !important;
+}
+
+.indicator-pill.green,
+.indicator.green {
+	background: rgba(31, 138, 122, 0.18) !important;
 	color: var(--unisoft-teal-deep) !important;
 }
 
-.modal-content {
-	border-radius: 16px !important;
+.indicator-pill.orange,
+.indicator.orange {
+	background: rgba(217, 119, 6, 0.14) !important;
 }
 
-.awesomplete > ul > li[aria-selected="true"] {
-	background: rgba(31, 138, 122, 0.12) !important;
+.indicator-pill.red,
+.indicator.red {
+	background: rgba(185, 28, 28, 0.12) !important;
+}
+
+/* ---------- Forms ---------- */
+.form-layout,
+.form-page,
+.form-column {
+	background: transparent !important;
+}
+
+.form-section .section-head,
+.form-dashboard .section-head {
+	font-weight: 650 !important;
+	color: var(--unisoft-ink) !important;
+	border-bottom: 1px solid var(--unisoft-border) !important;
+	padding-bottom: 8px !important;
+	margin-bottom: 12px !important;
+}
+
+.form-control,
+.input-with-feedback,
+select.form-control,
+textarea.form-control,
+.frappe-control input,
+.frappe-control textarea,
+.frappe-control select,
+.like-disabled-input {
+	border-radius: 10px !important;
+	border: 1px solid rgba(15, 28, 36, 0.12) !important;
+	background: #fff !important;
+	min-height: 38px;
+}
+
+.form-control:focus,
+.input-with-feedback:focus,
+.frappe-control input:focus,
+.frappe-control textarea:focus,
+.frappe-control select:focus {
+	border-color: var(--unisoft-teal) !important;
+	box-shadow: 0 0 0 3px rgba(31, 138, 122, 0.18) !important;
+	outline: none !important;
+}
+
+.control-label,
+.frappe-control .clearfix,
+.label-area {
+	color: #4a5a62 !important;
+	font-weight: 550 !important;
+}
+
+.grid-heading-row,
+.grid-row,
+.form-grid {
+	border-radius: 12px !important;
+}
+
+.grid-heading-row {
+	background: var(--unisoft-mist) !important;
+}
+
+.grid-row:hover {
+	background: rgba(31, 138, 122, 0.04) !important;
+}
+
+/* ---------- Modals / dropdowns ---------- */
+.modal-content,
+.modal-dialog .modal-content {
+	border-radius: 16px !important;
+	border: 1px solid var(--unisoft-border) !important;
+	box-shadow: 0 24px 60px rgba(15, 28, 36, 0.2) !important;
+}
+
+.modal-header {
+	border-bottom: 1px solid var(--unisoft-border) !important;
+}
+
+.modal-title {
+	font-family: "Fraunces", Georgia, serif !important;
+	color: var(--unisoft-ink) !important;
+}
+
+.dropdown-menu {
+	border-radius: 12px !important;
+	border: 1px solid var(--unisoft-border) !important;
+	box-shadow: var(--unisoft-shadow) !important;
+	padding: 6px !important;
+}
+
+.dropdown-item {
+	border-radius: 8px !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item.active {
+	background: var(--unisoft-teal-soft) !important;
+	color: var(--unisoft-ink) !important;
+}
+
+.awesomplete > ul {
+	border-radius: 12px !important;
+	border: 1px solid var(--unisoft-border) !important;
+	box-shadow: var(--unisoft-shadow) !important;
+}
+
+.awesomplete > ul > li[aria-selected="true"],
+.awesomplete > ul > li:hover {
+	background: var(--unisoft-teal-soft) !important;
+}
+
+/* ---------- Tables / report ---------- */
+.datatable,
+.dt-scrollable,
+.report-wrapper,
+.query-report {
+	border-radius: 14px !important;
+	overflow: hidden;
+	background: #fff !important;
+	border: 1px solid var(--unisoft-border) !important;
+}
+
+.datatable .dt-header .dt-cell {
+	background: var(--unisoft-mist) !important;
+	color: var(--unisoft-ink) !important;
+	font-weight: 600 !important;
+}
+
+.datatable .dt-row:hover .dt-cell {
+	background: rgba(31, 138, 122, 0.05) !important;
+}
+
+/* ---------- Notifications / toasts ---------- */
+.alert,
+.message-box,
+.toast,
+.desk-toast {
+	border-radius: 12px !important;
+}
+
+.notification-list-header,
+.notification-item:hover {
+	background: var(--unisoft-teal-soft) !important;
+}
+
+/* ---------- Tabs / switches ---------- */
+.form-tabs-list,
+.nav-tabs {
+	border-bottom: 1px solid var(--unisoft-border) !important;
+}
+
+.nav-tabs .nav-link.active,
+.form-tabs .nav-link.active {
+	color: var(--unisoft-teal-deep) !important;
+	border-bottom: 2px solid var(--unisoft-teal) !important;
+	font-weight: 650 !important;
+}
+
+.nav-tabs .nav-link {
+	color: var(--subtle-fg) !important;
+}
+
+/* ---------- Scrollbars (webkit) ---------- */
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: rgba(15, 28, 36, 0.22);
+	border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: rgba(31, 138, 122, 0.55);
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* ---------- App switcher / avatar ---------- */
+.app-logo,
+.avatar,
+.user-image,
+.avatar-frame {
+	border-radius: 10px !important;
+}
+
+.avatar {
+	box-shadow: 0 0 0 2px rgba(31, 138, 122, 0.25);
+}
+
+/* ---------- Empty states ---------- */
+.empty-state,
+.no-result,
+.list-empty-state {
+	color: var(--subtle-fg) !important;
+}
+
+/* ---------- Kanban / calendar accents ---------- */
+.kanban-column,
+.fc-view-harness,
+.fc-toolbar {
+	border-radius: 14px !important;
+}
+
+.kanban-column-header,
+.fc-button-primary {
+	background: var(--unisoft-teal) !important;
+	border-color: var(--unisoft-teal) !important;
 }
