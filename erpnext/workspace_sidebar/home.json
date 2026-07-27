@@ -60,20 +60,9 @@
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Custom Test",
-   "link_to": "Custom Test",
-   "link_type": "Workspace",
-   "show_arrow": 0,
-   "type": "Link"
   }
  ],
- "modified": "2026-07-27 19:00:00.000000",
+ "modified": "2026-01-10 00:06:12.971358",
  "modified_by": "Administrator",
  "module": "Setup",
  "name": "Home",
