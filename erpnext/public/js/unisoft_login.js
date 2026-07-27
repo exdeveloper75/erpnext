@@ -10,4 +10,10 @@ frappe.ready(function () {
 	if (subtitle) {
 		subtitle.textContent = "Welcome back. Use your account to continue.";
 	}
+	// Replace default ERPNext logo with Mezan M logo
+	document.querySelectorAll(".for-login img, .page-card img, .app-logo").forEach((img) => {
+		img.src = "/assets/erpnext/images/mezan-logo.svg";
+		img.alt = "MezanErp";
+		img.style.borderRadius = "10px";
+	});
 });
