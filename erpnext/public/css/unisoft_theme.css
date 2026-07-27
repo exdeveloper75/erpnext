@@ -1,0 +1,100 @@
+/* Unisoft desk theme */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+:root {
+	--unisoft-ink: #0f1c24;
+	--unisoft-slate: #1a2f3a;
+	--unisoft-teal: #1f8a7a;
+	--unisoft-teal-deep: #14685c;
+	--unisoft-mist: #e8f2f0;
+	--unisoft-surface: #f7fbfa;
+	--primary: var(--unisoft-teal);
+	--btn-primary: var(--unisoft-teal);
+	--blue-500: var(--unisoft-teal);
+	--blue-600: var(--unisoft-teal-deep);
+}
+
+html,
+body,
+.desk,
+.navbar,
+.sidebar-menu,
+.list-row,
+.form-layout,
+.modal {
+	font-family: "DM Sans", system-ui, sans-serif !important;
+}
+
+.navbar {
+	background: linear-gradient(90deg, var(--unisoft-ink), var(--unisoft-slate)) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .es-icon {
+	color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.sidebar-menu,
+.desk-sidebar,
+.body-sidebar {
+	background: #0f1c24 !important;
+	color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.standard-sidebar-item.selected,
+.sidebar-item-container.selected,
+.standard-sidebar-item:hover {
+	background: rgba(31, 138, 122, 0.22) !important;
+}
+
+.btn-primary,
+.btn.btn-primary,
+button.btn-primary,
+.es-button[data-variant="solid"] {
+	background: linear-gradient(180deg, var(--unisoft-teal), var(--unisoft-teal-deep)) !important;
+	border-color: transparent !important;
+	color: #fff !important;
+	border-radius: 10px !important;
+}
+
+.btn-primary:hover {
+	filter: brightness(1.05);
+}
+
+.page-head,
+.list-row-head,
+.form-dashboard-section,
+.widget,
+.card,
+.frappe-card {
+	border-radius: 14px !important;
+}
+
+.widget,
+.frappe-card,
+.form-section {
+	box-shadow: 0 8px 24px rgba(15, 28, 36, 0.06) !important;
+	border: 1px solid rgba(15, 28, 36, 0.06) !important;
+}
+
+.form-control:focus,
+.input-with-feedback:focus {
+	border-color: var(--unisoft-teal) !important;
+	box-shadow: 0 0 0 3px rgba(31, 138, 122, 0.18) !important;
+}
+
+.indicator-pill.blue,
+.indicator.blue {
+	background: rgba(31, 138, 122, 0.15) !important;
+	color: var(--unisoft-teal-deep) !important;
+}
+
+.modal-content {
+	border-radius: 16px !important;
+}
+
+.awesomplete > ul > li[aria-selected="true"] {
+	background: rgba(31, 138, 122, 0.12) !important;
+}
