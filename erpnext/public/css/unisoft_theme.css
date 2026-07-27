@@ -115,17 +115,35 @@ header.navbar,
 	color: rgba(255, 255, 255, 0.55) !important;
 }
 
-/* ---------- Sidebar (Frappe uses .active-sidebar + --sidebar-active-color) ---------- */
+/* ---------- Sidebar (keep Frappe collapse animation working) ---------- */
 :root {
-	--surface-sidebar: var(--unisoft-sidebar) !important;
-	--sidebar-active-color: #ffffff !important;
-	--sidebar-hover-color: rgba(255, 255, 255, 0.14) !important;
-	--sidebar-border-color: rgba(255, 255, 255, 0.1) !important;
+	--surface-sidebar: var(--unisoft-sidebar);
+	--sidebar-active-color: #ffffff;
+	--sidebar-hover-color: rgba(255, 255, 255, 0.14);
+	--sidebar-border-color: rgba(255, 255, 255, 0.1);
 }
 
-.body-sidebar-container,
-.body-sidebar,
-.desk-sidebar-container,
+/* Only paint the panel when expanded — never force background on the container */
+.body-sidebar-container.expanded .body-sidebar {
+	background: var(--unisoft-sidebar) !important;
+	color: #eef6f2 !important;
+	border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Collapsed: must stay transparent so panel can slide/fade away */
+.body-sidebar-container:not(.expanded) .body-sidebar {
+	background: transparent !important;
+	border-right-color: transparent !important;
+	pointer-events: none !important;
+}
+
+.body-sidebar-container:not(.expanded) .body-sidebar > *:not(.dropdown-notifications):not(.dropdown-background-tasks) {
+	transform: translateX(-12px) !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+/* Other sidebars (list/form) keep Unisoft green without touching body collapse */
 .sidebar-menu,
 .desk-sidebar,
 .layout-side-section,
@@ -145,9 +163,15 @@ header.navbar,
 .body-sidebar .sidebar-item-control,
 .body-sidebar .drop-icon,
 .body-sidebar .es-icon,
-.body-sidebar svg,
 .body-sidebar .section-break,
 .body-sidebar .section-label {
+	color: #eef6f2 !important;
+}
+
+.body-sidebar .sidebar-item-icon svg,
+.body-sidebar .drop-icon svg,
+.body-sidebar .es-icon svg,
+.body-sidebar .item-anchor svg {
 	color: #eef6f2 !important;
 	fill: #eef6f2 !important;
 	stroke: #eef6f2 !important;
@@ -163,7 +187,7 @@ header.navbar,
 	border-radius: 8px !important;
 }
 
-/* Selected pill is white — force DARK text + triangle (fixes invisible white-on-white) */
+/* Selected pill is white — dark text + triangle */
 .body-sidebar .standard-sidebar-item.active-sidebar,
 .body-sidebar .active-sidebar {
 	background: #ffffff !important;
@@ -177,22 +201,25 @@ header.navbar,
 .body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-control,
 .body-sidebar .standard-sidebar-item.active-sidebar .drop-icon,
 .body-sidebar .standard-sidebar-item.active-sidebar .es-icon,
+.body-sidebar .active-sidebar .item-anchor,
+.body-sidebar .active-sidebar .sidebar-item-label,
+.body-sidebar .active-sidebar .drop-icon {
+	color: #152820 !important;
+	font-weight: 650 !important;
+}
+
 .body-sidebar .standard-sidebar-item.active-sidebar svg,
 .body-sidebar .standard-sidebar-item.active-sidebar svg use,
 .body-sidebar .standard-sidebar-item.active-sidebar path,
-.body-sidebar .active-sidebar .item-anchor,
-.body-sidebar .active-sidebar .sidebar-item-label,
-.body-sidebar .active-sidebar .drop-icon,
 .body-sidebar .active-sidebar svg,
 .body-sidebar .active-sidebar svg use,
 .body-sidebar .active-sidebar path {
 	color: #152820 !important;
 	fill: #152820 !important;
 	stroke: #152820 !important;
-	font-weight: 650 !important;
 }
 
-/* Hover (non-selected): light wash, keep light text */
+/* Hover (non-selected) */
 .body-sidebar .standard-sidebar-item:not(.active-sidebar):hover {
 	background: rgba(255, 255, 255, 0.14) !important;
 }
@@ -201,6 +228,18 @@ header.navbar,
 .body-sidebar .standard-sidebar-item:not(.active-sidebar):hover .sidebar-item-label,
 .body-sidebar .standard-sidebar-item:not(.active-sidebar):hover svg {
 	color: #ffffff !important;
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
+}
+
+/* Keep toggle button usable on green sidebar */
+.body-sidebar .sidebar-toggle-btn {
+	background: var(--unisoft-sidebar) !important;
+	border-color: rgba(255, 255, 255, 0.25) !important;
+	color: #ffffff !important;
+}
+
+.body-sidebar .sidebar-toggle-btn svg {
 	fill: #ffffff !important;
 	stroke: #ffffff !important;
 }
