@@ -4,7 +4,7 @@ frappe.ready(function () {
 	}
 	const title = document.querySelector(".for-login .page-card-head-text h4");
 	if (title && /sign in/i.test(title.textContent || "")) {
-		title.textContent = "Sign in to Unisoft";
+		title.textContent = "Sign in to MezanErp";
 	}
 	const subtitle = document.querySelector(".for-login .page-card-subtitle");
 	if (subtitle) {

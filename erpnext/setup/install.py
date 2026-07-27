@@ -40,8 +40,10 @@ def after_install():
 	make_default_operations()
 	update_pegged_currencies()
 	from erpnext.setup.unisoft_currencies import restrict_currencies
+	from erpnext.setup.mezan_branding import set_app_display_name
 
 	restrict_currencies(delete_unused=True)
+	set_app_display_name()
 	set_default_print_formats()
 	toggle_hidden_fields()
 	frappe.db.commit()
@@ -281,7 +283,7 @@ def add_standard_navbar_items():
 
 
 def add_app_name():
-	frappe.db.set_single_value("System Settings", "app_name", "ERPNext")
+	frappe.db.set_single_value("System Settings", "app_name", "MezanErp")
 
 
 def update_roles():

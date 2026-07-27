@@ -37,7 +37,7 @@ body[data-path="login"] .page-content-wrapper {
 
 /* Brand mark */
 body[data-path="login"] .page-content-wrapper::before {
-	content: "Unisoft";
+	content: "MezanErp";
 	position: fixed;
 	left: clamp(24px, 6vw, 72px);
 	top: clamp(28px, 8vh, 80px);
