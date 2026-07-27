@@ -505,3 +505,4 @@ erpnext.patches.v16_0.recalculate_bins_for_production_plan_items
 erpnext.patches.v16_0.rename_ar_ap_ageing_filter
 erpnext.patches.v17_0.restrict_unisoft_currencies
 erpnext.patches.v17_0.set_mezan_app_name
+erpnext.patches.v17_0.enable_arabic_language

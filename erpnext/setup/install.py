@@ -41,9 +41,11 @@ def after_install():
 	update_pegged_currencies()
 	from erpnext.setup.unisoft_currencies import restrict_currencies
 	from erpnext.setup.mezan_branding import set_app_display_name
+	from erpnext.setup.mezan_languages import ensure_arabic_language
 
 	restrict_currencies(delete_unused=True)
 	set_app_display_name()
+	ensure_arabic_language()
 	set_default_print_formats()
 	toggle_hidden_fields()
 	frappe.db.commit()
