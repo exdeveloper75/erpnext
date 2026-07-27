@@ -110,7 +110,7 @@ header.navbar,
 	color: rgba(255, 255, 255, 0.55) !important;
 }
 
-/* ---------- Sidebar (light Unisoft surface) ---------- */
+/* ---------- Sidebar (medium Unisoft slate) ---------- */
 .sidebar-menu,
 .desk-sidebar,
 .body-sidebar,
@@ -121,9 +121,9 @@ header.navbar,
 .desk-sidebar-container,
 .body-sidebar-container,
 .sidebar-menu-container {
-	background: #f0f6f5 !important;
-	color: var(--unisoft-ink) !important;
-	border-right: 1px solid rgba(15, 28, 36, 0.08) !important;
+	background: #243b45 !important;
+	color: rgba(255, 255, 255, 0.9) !important;
+	border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 .sidebar-menu a,
@@ -142,15 +142,15 @@ header.navbar,
 .desk-sidebar .es-icon,
 .body-sidebar .es-icon,
 .workspace-sidebar .es-icon {
-	color: #2a3b44 !important;
-	fill: #2a3b44;
-	stroke: #2a3b44;
+	color: rgba(236, 244, 242, 0.88) !important;
+	fill: rgba(236, 244, 242, 0.88);
+	stroke: rgba(236, 244, 242, 0.88);
 }
 
 .standard-sidebar-label,
 .sidebar-label,
 .section-label {
-	color: #6a7b83 !important;
+	color: rgba(190, 210, 206, 0.75) !important;
 	font-weight: 600 !important;
 	letter-spacing: 0.02em;
 }
@@ -167,7 +167,7 @@ header.navbar,
 .sidebar-item-container:hover,
 .workspace-sidebar .sidebar-item-container:hover,
 .body-sidebar .sidebar-item-container:hover {
-	background: rgba(31, 138, 122, 0.1) !important;
+	background: rgba(31, 138, 122, 0.22) !important;
 }
 
 .standard-sidebar-item.selected,
@@ -176,7 +176,7 @@ header.navbar,
 .workspace-sidebar .sidebar-item-container.selected,
 .body-sidebar .selected,
 .body-sidebar .sidebar-item-container.selected {
-	background: rgba(31, 138, 122, 0.16) !important;
+	background: rgba(31, 138, 122, 0.32) !important;
 }
 
 .standard-sidebar-item.selected .sidebar-item-label,
@@ -185,8 +185,8 @@ header.navbar,
 .body-sidebar .selected .sidebar-item-label,
 .standard-sidebar-item.selected .es-icon,
 .sidebar-item-container.selected .es-icon {
-	color: var(--unisoft-teal-deep) !important;
-	fill: var(--unisoft-teal-deep);
+	color: #ffffff !important;
+	fill: #ffffff;
 	font-weight: 650 !important;
 }
 
