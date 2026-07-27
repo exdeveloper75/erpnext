@@ -314,12 +314,22 @@ button.btn-primary,
 
 .list-row-head,
 .level.list-row-head {
-	background: #fff !important;
-	border: 1px solid var(--unisoft-border) !important;
+	background: var(--unisoft-sidebar) !important;
+	border: 1px solid rgba(255, 255, 255, 0.08) !important;
 	border-radius: 12px !important;
 	box-shadow: none !important;
-	color: var(--subtle-fg) !important;
+	color: #ffffff !important;
 	font-weight: 600 !important;
+}
+
+.list-row-head *,
+.list-row-head .list-row-col,
+.list-row-head .list-subject,
+.list-row-head span,
+.list-row-head a,
+.level.list-row-head .level-item {
+	color: #ffffff !important;
+	fill: #ffffff !important;
 }
 
 .list-row,
@@ -423,12 +433,47 @@ textarea.form-control,
 	border-radius: 12px !important;
 }
 
-.grid-heading-row {
-	background: var(--unisoft-mist) !important;
+/* All system grid headers: dark green + white text */
+.grid-heading-row,
+.form-grid .grid-heading-row,
+.form-grid .grid-row:first-child,
+div.form-grid .grid-heading-row .grid-static-col,
+div.form-grid .grid-heading-row .row-check,
+div.form-grid .grid-heading-row .row-index,
+.grid-heading-row .data-row,
+.grid-heading-row .col,
+.grid-heading-row .grid-static-col,
+.grid-heading-row .static-area,
+.grid-heading-row .grid-row-check {
+	background: var(--unisoft-sidebar) !important;
+	background-color: var(--unisoft-sidebar) !important;
+	color: #ffffff !important;
+}
+
+.grid-heading-row *,
+.grid-heading-row .static-area,
+.grid-heading-row .grid-static-col,
+.grid-heading-row span,
+.grid-heading-row div,
+.grid-heading-row a,
+.form-grid .grid-heading-row .grid-static-col,
+.form-grid .grid-heading-row .static-area {
+	color: #ffffff !important;
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
+}
+
+.grid-heading-row .btn,
+.grid-heading-row .grid-row-check input,
+.grid-heading-row svg {
+	color: #ffffff !important;
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
+	filter: none !important;
 }
 
 .grid-row:hover {
-	background: rgba(31, 138, 122, 0.04) !important;
+	background: rgba(67, 107, 94, 0.06) !important;
 }
 
 /* ---------- Modals / dropdowns ---------- */
@@ -488,14 +533,31 @@ textarea.form-control,
 	border: 1px solid var(--unisoft-border) !important;
 }
 
-.datatable .dt-header .dt-cell {
-	background: var(--unisoft-mist) !important;
-	color: var(--unisoft-ink) !important;
+.datatable {
+	--dt-header-cell-bg: var(--unisoft-sidebar) !important;
+	--dt-text-color: #ffffff !important;
+}
+
+.datatable .dt-header .dt-cell,
+.datatable .dt-header .dt-cell__content,
+.datatable .dt-header .dt-row-header,
+.datatable .dt-header .dt-cell--header,
+.datatable .dt-header .dt-cell--header .dt-cell__content {
+	background: var(--unisoft-sidebar) !important;
+	background-color: var(--unisoft-sidebar) !important;
+	color: #ffffff !important;
 	font-weight: 600 !important;
 }
 
+.datatable .dt-header svg,
+.datatable .dt-header .dt-cell__content {
+	color: #ffffff !important;
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
+}
+
 .datatable .dt-row:hover .dt-cell {
-	background: rgba(31, 138, 122, 0.05) !important;
+	background: rgba(67, 107, 94, 0.06) !important;
 }
 
 /* ---------- Notifications / toasts ---------- */
