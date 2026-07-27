@@ -4,7 +4,7 @@ frappe.ready(function () {
 	}
 	const title = document.querySelector(".for-login .page-card-head-text h4");
 	if (title && /sign in/i.test(title.textContent || "")) {
-		title.textContent = "Sign in to MezanErp";
+		title.textContent = "Sign in to Mezan ERP";
 	}
 	const subtitle = document.querySelector(".for-login .page-card-subtitle");
 	if (subtitle) {
@@ -13,7 +13,7 @@ frappe.ready(function () {
 	// Replace default ERPNext logo with Mezan M logo
 	document.querySelectorAll(".for-login img, .page-card img, .app-logo").forEach((img) => {
 		img.src = "/assets/erpnext/images/mezan-logo.svg";
-		img.alt = "MezanErp";
+		img.alt = "Mezan ERP";
 		img.style.borderRadius = "10px";
 	});
 });

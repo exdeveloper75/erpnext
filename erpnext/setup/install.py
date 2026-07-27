@@ -285,7 +285,7 @@ def add_standard_navbar_items():
 
 
 def add_app_name():
-	frappe.db.set_single_value("System Settings", "app_name", "MezanErp")
+	frappe.db.set_single_value("System Settings", "app_name", "Mezan ERP")
 
 
 def update_roles():

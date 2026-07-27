@@ -3,13 +3,13 @@
 
 import frappe
 
-APP_DISPLAY_NAME = "MezanErp"
+APP_DISPLAY_NAME = "Mezan ERP"
 APP_LOGO = "/assets/erpnext/images/mezan-logo.svg"
 APP_FAVICON = "/assets/erpnext/images/mezan-favicon.svg"
 
 
 def set_app_display_name():
-	"""Set System + Website branding to MezanErp with M logo."""
+	"""Set System + Website branding to Mezan ERP with M logo."""
 	frappe.db.set_single_value("System Settings", "app_name", APP_DISPLAY_NAME)
 
 	ws = frappe.get_single("Website Settings")
