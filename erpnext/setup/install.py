@@ -39,6 +39,9 @@ def after_install():
 	update_roles()
 	make_default_operations()
 	update_pegged_currencies()
+	from erpnext.setup.unisoft_currencies import restrict_currencies
+
+	restrict_currencies(delete_unused=True)
 	set_default_print_formats()
 	toggle_hidden_fields()
 	frappe.db.commit()
