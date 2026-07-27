@@ -5,8 +5,8 @@
 	/* Palette matched to Unisoft CRM green reference */
 	--unisoft-ink: #152820;
 	--unisoft-slate: #1e3a32;
-	--unisoft-sidebar: #3d6f64;
-	--unisoft-sidebar-deep: #335c54;
+	--unisoft-sidebar: #436b5e;
+	--unisoft-sidebar-deep: #35574c;
 	--unisoft-teal: #3d8f7c;
 	--unisoft-teal-deep: #2f7263;
 	--unisoft-teal-soft: rgba(61, 143, 124, 0.18);
@@ -115,116 +115,94 @@ header.navbar,
 	color: rgba(255, 255, 255, 0.55) !important;
 }
 
-/* ---------- Sidebar (muted seafoam teal — reference CRM green) ---------- */
+/* ---------- Sidebar (Frappe uses .active-sidebar + --sidebar-active-color) ---------- */
+:root {
+	--surface-sidebar: var(--unisoft-sidebar) !important;
+	--sidebar-active-color: #ffffff !important;
+	--sidebar-hover-color: rgba(255, 255, 255, 0.14) !important;
+	--sidebar-border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.body-sidebar-container,
+.body-sidebar,
+.desk-sidebar-container,
 .sidebar-menu,
 .desk-sidebar,
-.body-sidebar,
 .layout-side-section,
 .list-sidebar,
 .form-sidebar,
 .workspace-sidebar,
-.desk-sidebar-container,
-.body-sidebar-container,
 .sidebar-menu-container {
 	background: var(--unisoft-sidebar) !important;
-	color: #e8f2ee !important;
-	border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+	color: #eef6f2 !important;
+	border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.sidebar-menu a,
-.desk-sidebar a,
-.body-sidebar a,
-.standard-sidebar-label,
-.sidebar-item-label,
-.list-sidebar .sidebar-label,
-.form-sidebar .sidebar-label,
-.workspace-sidebar .item-anchor,
-.workspace-sidebar .sidebar-item-label,
+/* Default menu text / icons / triangle: light on green */
 .body-sidebar .item-anchor,
 .body-sidebar .sidebar-item-label,
-.sidebar-item-control,
-.sidebar-item-icon,
-.desk-sidebar .es-icon,
+.body-sidebar .sidebar-item-icon,
+.body-sidebar .sidebar-item-control,
+.body-sidebar .drop-icon,
 .body-sidebar .es-icon,
-.workspace-sidebar .es-icon,
-.sidebar-item-control .icon,
-.drop-icon,
-.sidebar-item-control svg,
 .body-sidebar svg,
-.workspace-sidebar svg,
-.desk-sidebar svg {
-	color: #e8f2ee !important;
-	fill: #e8f2ee !important;
-	stroke: #e8f2ee !important;
+.body-sidebar .section-break,
+.body-sidebar .section-label {
+	color: #eef6f2 !important;
+	fill: #eef6f2 !important;
+	stroke: #eef6f2 !important;
 }
 
-.standard-sidebar-label,
-.sidebar-label,
-.section-label {
-	color: rgba(232, 242, 238, 0.72) !important;
-	font-weight: 600 !important;
-	letter-spacing: 0.02em;
+.body-sidebar .section-break,
+.body-sidebar .section-label,
+.body-sidebar .standard-sidebar-label {
+	color: rgba(238, 246, 242, 0.7) !important;
 }
 
-.standard-sidebar-item,
-.sidebar-item-container,
-.workspace-sidebar .sidebar-item-container,
-.body-sidebar .sidebar-item-container {
-	border-radius: 10px !important;
-	margin: 2px 8px !important;
+.body-sidebar .standard-sidebar-item {
+	border-radius: 8px !important;
 }
 
-.standard-sidebar-item:hover,
-.sidebar-item-container:hover,
-.workspace-sidebar .sidebar-item-container:hover,
-.body-sidebar .sidebar-item-container:hover {
-	background: rgba(255, 255, 255, 0.14) !important;
+/* Selected pill is white — force DARK text + triangle (fixes invisible white-on-white) */
+.body-sidebar .standard-sidebar-item.active-sidebar,
+.body-sidebar .active-sidebar {
+	background: #ffffff !important;
+	box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.14) !important;
+	border-radius: 8px !important;
 }
 
-/* Selected: mint chip + dark text (not white-on-white) */
-.standard-sidebar-item.selected,
-.sidebar-item-container.selected,
-.workspace-sidebar .selected,
-.workspace-sidebar .sidebar-item-container.selected,
-.body-sidebar .selected,
-.body-sidebar .sidebar-item-container.selected,
-.standard-sidebar-item[aria-selected="true"],
-.sidebar-item-container.active {
-	background: #eef5f1 !important;
-}
-
-.standard-sidebar-item.selected .sidebar-item-label,
-.sidebar-item-container.selected .sidebar-item-label,
-.workspace-sidebar .selected .sidebar-item-label,
-.body-sidebar .selected .sidebar-item-label,
-.standard-sidebar-item.selected .item-anchor,
-.sidebar-item-container.selected .item-anchor,
-.standard-sidebar-item.selected a,
-.sidebar-item-container.selected a,
-.standard-sidebar-item.selected .es-icon,
-.sidebar-item-container.selected .es-icon,
-.standard-sidebar-item.selected svg,
-.sidebar-item-container.selected svg,
-.standard-sidebar-item.selected .drop-icon,
-.sidebar-item-container.selected .drop-icon,
-.standard-sidebar-item.selected .sidebar-item-control,
-.sidebar-item-container.selected .sidebar-item-control,
-.standard-sidebar-item.selected .icon,
-.sidebar-item-container.selected .icon,
-.body-sidebar .selected svg,
-.workspace-sidebar .selected svg {
+.body-sidebar .standard-sidebar-item.active-sidebar .item-anchor,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-label,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-control,
+.body-sidebar .standard-sidebar-item.active-sidebar .drop-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar .es-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar svg,
+.body-sidebar .standard-sidebar-item.active-sidebar svg use,
+.body-sidebar .standard-sidebar-item.active-sidebar path,
+.body-sidebar .active-sidebar .item-anchor,
+.body-sidebar .active-sidebar .sidebar-item-label,
+.body-sidebar .active-sidebar .drop-icon,
+.body-sidebar .active-sidebar svg,
+.body-sidebar .active-sidebar svg use,
+.body-sidebar .active-sidebar path {
 	color: #152820 !important;
 	fill: #152820 !important;
 	stroke: #152820 !important;
 	font-weight: 650 !important;
 }
 
-/* Nested/open triangle caret — stay dark when parent selected */
-.sidebar-item-container.selected > .sidebar-item-control .icon-sm,
-.sidebar-item-container.selected .drop-icon use,
-.selected .sidebar-item-control svg use {
-	fill: #152820 !important;
-	color: #152820 !important;
+/* Hover (non-selected): light wash, keep light text */
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):hover {
+	background: rgba(255, 255, 255, 0.14) !important;
+}
+
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):hover .item-anchor,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):hover .sidebar-item-label,
+.body-sidebar .standard-sidebar-item:not(.active-sidebar):hover svg {
+	color: #ffffff !important;
+	fill: #ffffff !important;
+	stroke: #ffffff !important;
 }
 
 /* ---------- Page head / breadcrumbs ---------- */
