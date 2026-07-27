@@ -2,25 +2,30 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
 
 :root {
-	--unisoft-ink: #0f1c24;
-	--unisoft-slate: #1a2f3a;
-	--unisoft-teal: #1f8a7a;
-	--unisoft-teal-deep: #14685c;
-	--unisoft-teal-soft: rgba(31, 138, 122, 0.14);
-	--unisoft-mist: #e8f2f0;
-	--unisoft-surface: #f5f9f8;
-	--unisoft-border: rgba(15, 28, 36, 0.08);
-	--unisoft-shadow: 0 10px 28px rgba(15, 28, 36, 0.07);
+	/* Palette matched to Unisoft CRM green reference */
+	--unisoft-ink: #152820;
+	--unisoft-slate: #1e3a32;
+	--unisoft-sidebar: #3d6f64;
+	--unisoft-sidebar-deep: #335c54;
+	--unisoft-teal: #3d8f7c;
+	--unisoft-teal-deep: #2f7263;
+	--unisoft-teal-soft: rgba(61, 143, 124, 0.18);
+	--unisoft-mist: #e7f0eb;
+	--unisoft-surface: #eef5f1;
+	--unisoft-accent: #f06a3d;
+	--unisoft-accent-soft: rgba(240, 106, 61, 0.16);
+	--unisoft-border: rgba(21, 40, 32, 0.1);
+	--unisoft-shadow: 0 10px 28px rgba(21, 40, 32, 0.08);
 
 	--primary: var(--unisoft-teal);
 	--primary-color: var(--unisoft-teal);
 	--btn-primary: var(--unisoft-teal);
-	--blue-400: #3aa894;
+	--blue-400: #55a894;
 	--blue-500: var(--unisoft-teal);
 	--blue-600: var(--unisoft-teal-deep);
-	--blue-700: #0f544a;
+	--blue-700: #24584d;
 	--bg-color: var(--unisoft-surface);
-	--subtle-fg: #5b6b73;
+	--subtle-fg: #5d726a;
 	--text-color: var(--unisoft-ink);
 	--heading-color: var(--unisoft-ink);
 	--border-color: var(--unisoft-border);
@@ -110,7 +115,7 @@ header.navbar,
 	color: rgba(255, 255, 255, 0.55) !important;
 }
 
-/* ---------- Sidebar (mid-tone sage) ---------- */
+/* ---------- Sidebar (muted seafoam teal — reference CRM green) ---------- */
 .sidebar-menu,
 .desk-sidebar,
 .body-sidebar,
@@ -121,9 +126,9 @@ header.navbar,
 .desk-sidebar-container,
 .body-sidebar-container,
 .sidebar-menu-container {
-	background: #c9d8d4 !important;
-	color: #1f333b !important;
-	border-right: 1px solid rgba(15, 28, 36, 0.1) !important;
+	background: var(--unisoft-sidebar) !important;
+	color: rgba(255, 255, 255, 0.92) !important;
+	border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .sidebar-menu a,
@@ -142,15 +147,15 @@ header.navbar,
 .desk-sidebar .es-icon,
 .body-sidebar .es-icon,
 .workspace-sidebar .es-icon {
-	color: #243b45 !important;
-	fill: #243b45;
-	stroke: #243b45;
+	color: rgba(240, 248, 245, 0.92) !important;
+	fill: rgba(240, 248, 245, 0.92);
+	stroke: rgba(240, 248, 245, 0.92);
 }
 
 .standard-sidebar-label,
 .sidebar-label,
 .section-label {
-	color: #4d646c !important;
+	color: rgba(220, 236, 230, 0.72) !important;
 	font-weight: 600 !important;
 	letter-spacing: 0.02em;
 }
@@ -167,7 +172,7 @@ header.navbar,
 .sidebar-item-container:hover,
 .workspace-sidebar .sidebar-item-container:hover,
 .body-sidebar .sidebar-item-container:hover {
-	background: rgba(31, 138, 122, 0.16) !important;
+	background: rgba(255, 255, 255, 0.12) !important;
 }
 
 .standard-sidebar-item.selected,
@@ -176,7 +181,7 @@ header.navbar,
 .workspace-sidebar .sidebar-item-container.selected,
 .body-sidebar .selected,
 .body-sidebar .sidebar-item-container.selected {
-	background: rgba(31, 138, 122, 0.24) !important;
+	background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .standard-sidebar-item.selected .sidebar-item-label,
@@ -185,8 +190,8 @@ header.navbar,
 .body-sidebar .selected .sidebar-item-label,
 .standard-sidebar-item.selected .es-icon,
 .sidebar-item-container.selected .es-icon {
-	color: #14685c !important;
-	fill: #14685c;
+	color: #ffffff !important;
+	fill: #ffffff;
 	font-weight: 650 !important;
 }
 
@@ -221,7 +226,7 @@ button.btn-primary,
 	border-color: transparent !important;
 	color: #fff !important;
 	border-radius: 10px !important;
-	box-shadow: 0 8px 18px rgba(20, 104, 92, 0.22) !important;
+	box-shadow: 0 8px 18px rgba(47, 114, 99, 0.28) !important;
 	font-weight: 600 !important;
 }
 
@@ -541,7 +546,7 @@ textarea.form-control,
 }
 
 .avatar {
-	box-shadow: 0 0 0 2px rgba(31, 138, 122, 0.25);
+	box-shadow: 0 0 0 2px rgba(61, 143, 124, 0.3);
 }
 
 /* ---------- Empty states ---------- */
@@ -562,4 +567,20 @@ textarea.form-control,
 .fc-button-primary {
 	background: var(--unisoft-teal) !important;
 	border-color: var(--unisoft-teal) !important;
+}
+
+/* ---------- Coral accent (reference highlights) ---------- */
+.notification-icon-dot,
+.indicator.red,
+.indicator-pill.red,
+.btn-danger-light,
+.favorite-btn.active,
+.liked,
+.star-icon.active {
+	color: var(--unisoft-accent) !important;
+}
+
+.progress .progress-bar,
+.progress-bar.bg-primary {
+	background-color: var(--unisoft-teal) !important;
 }
