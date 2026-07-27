@@ -127,7 +127,7 @@ header.navbar,
 .body-sidebar-container,
 .sidebar-menu-container {
 	background: var(--unisoft-sidebar) !important;
-	color: rgba(255, 255, 255, 0.92) !important;
+	color: #e8f2ee !important;
 	border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -146,16 +146,22 @@ header.navbar,
 .sidebar-item-icon,
 .desk-sidebar .es-icon,
 .body-sidebar .es-icon,
-.workspace-sidebar .es-icon {
-	color: rgba(240, 248, 245, 0.92) !important;
-	fill: rgba(240, 248, 245, 0.92);
-	stroke: rgba(240, 248, 245, 0.92);
+.workspace-sidebar .es-icon,
+.sidebar-item-control .icon,
+.drop-icon,
+.sidebar-item-control svg,
+.body-sidebar svg,
+.workspace-sidebar svg,
+.desk-sidebar svg {
+	color: #e8f2ee !important;
+	fill: #e8f2ee !important;
+	stroke: #e8f2ee !important;
 }
 
 .standard-sidebar-label,
 .sidebar-label,
 .section-label {
-	color: rgba(220, 236, 230, 0.72) !important;
+	color: rgba(232, 242, 238, 0.72) !important;
 	font-weight: 600 !important;
 	letter-spacing: 0.02em;
 }
@@ -172,27 +178,53 @@ header.navbar,
 .sidebar-item-container:hover,
 .workspace-sidebar .sidebar-item-container:hover,
 .body-sidebar .sidebar-item-container:hover {
-	background: rgba(255, 255, 255, 0.12) !important;
+	background: rgba(255, 255, 255, 0.14) !important;
 }
 
+/* Selected: mint chip + dark text (not white-on-white) */
 .standard-sidebar-item.selected,
 .sidebar-item-container.selected,
 .workspace-sidebar .selected,
 .workspace-sidebar .sidebar-item-container.selected,
 .body-sidebar .selected,
-.body-sidebar .sidebar-item-container.selected {
-	background: rgba(255, 255, 255, 0.2) !important;
+.body-sidebar .sidebar-item-container.selected,
+.standard-sidebar-item[aria-selected="true"],
+.sidebar-item-container.active {
+	background: #eef5f1 !important;
 }
 
 .standard-sidebar-item.selected .sidebar-item-label,
 .sidebar-item-container.selected .sidebar-item-label,
 .workspace-sidebar .selected .sidebar-item-label,
 .body-sidebar .selected .sidebar-item-label,
+.standard-sidebar-item.selected .item-anchor,
+.sidebar-item-container.selected .item-anchor,
+.standard-sidebar-item.selected a,
+.sidebar-item-container.selected a,
 .standard-sidebar-item.selected .es-icon,
-.sidebar-item-container.selected .es-icon {
-	color: #ffffff !important;
-	fill: #ffffff;
+.sidebar-item-container.selected .es-icon,
+.standard-sidebar-item.selected svg,
+.sidebar-item-container.selected svg,
+.standard-sidebar-item.selected .drop-icon,
+.sidebar-item-container.selected .drop-icon,
+.standard-sidebar-item.selected .sidebar-item-control,
+.sidebar-item-container.selected .sidebar-item-control,
+.standard-sidebar-item.selected .icon,
+.sidebar-item-container.selected .icon,
+.body-sidebar .selected svg,
+.workspace-sidebar .selected svg {
+	color: #152820 !important;
+	fill: #152820 !important;
+	stroke: #152820 !important;
 	font-weight: 650 !important;
+}
+
+/* Nested/open triangle caret — stay dark when parent selected */
+.sidebar-item-container.selected > .sidebar-item-control .icon-sm,
+.sidebar-item-container.selected .drop-icon use,
+.selected .sidebar-item-control svg use {
+	fill: #152820 !important;
+	color: #152820 !important;
 }
 
 /* ---------- Page head / breadcrumbs ---------- */
