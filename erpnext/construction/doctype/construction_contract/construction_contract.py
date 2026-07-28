@@ -48,6 +48,14 @@ class ConstructionContract(Document):
 		project.customer = self.party
 		project.expected_start_date = self.start_date
 		project.expected_end_date = self.end_date
+		if hasattr(project, "primary_construction_contract"):
+			project.primary_construction_contract = self.name
+		if hasattr(project, "construction_retention_percent"):
+			project.construction_retention_percent = self.retention_percent
+		if hasattr(project, "construction_advance_percent"):
+			project.construction_advance_percent = self.advance_percent
+		if hasattr(project, "construction_delay_penalty_percent"):
+			project.construction_delay_penalty_percent = self.delay_penalty_percent
 		project.insert()
 
 		self.db_set("project", project.name)

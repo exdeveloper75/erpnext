@@ -51,7 +51,7 @@ class ContractorPaymentCertificate(Document):
 		self.collection_status = info["collection_status"]
 
 	def on_submit(self):
-		self.db_set("status", "Submitted")
+		self.db_set("status", "Approved")
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
@@ -73,6 +73,7 @@ class ContractorPaymentCertificate(Document):
 
 	@frappe.whitelist()
 	def mark_approved(self):
+		"""Legacy button; workflow Approve is preferred when enabled."""
 		if self.docstatus != 1:
 			frappe.throw(frappe._("Submit the certificate before approving"))
 		if not flt(self.approved_amount):

@@ -59,6 +59,8 @@ frappe.ui.form.on("Project", {
 			},
 			__("Construction")
 		);
+
+		maybe_link_primary_contract(frm);
 	},
 });
 
@@ -87,4 +89,30 @@ function open_or_create_budget(frm) {
 			});
 		}
 	);
+}
+
+function maybe_link_primary_contract(frm) {
+	if (!frm.fields_dict.primary_construction_contract) return;
+	if (frm.doc.primary_construction_contract) return;
+	if (frm._construction_contract_prompted) return;
+	frm._construction_contract_prompted = true;
+
+	frappe.db.get_list("Construction Contract", {
+		filters: { project: frm.doc.name, docstatus: 1 },
+		fields: ["name", "title"],
+		limit: 1,
+		order_by: "modified desc",
+	}).then((rows) => {
+		if (!rows || !rows.length) return;
+		const contract = rows[0];
+		frappe.confirm(
+			__("Link primary Construction Contract {0} to this project?", [
+				`<b>${frappe.utils.escape_html(contract.name)}</b>`,
+			]),
+			() => {
+				frm.set_value("primary_construction_contract", contract.name);
+				frm.save();
+			}
+		);
+	});
 }

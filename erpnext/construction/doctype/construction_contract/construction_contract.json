@@ -28,6 +28,16 @@
   "guarantee_percent",
   "section_terms",
   "payment_terms",
+  "delay_penalty_terms",
+  "guarantee_terms",
+  "advance_terms",
+  "special_conditions",
+  "section_guarantee_dates",
+  "guarantee_start_date",
+  "guarantee_end_date",
+  "column_break_guarantee",
+  "signed_contract",
+  "guarantee_document",
   "section_items",
   "items",
   "section_totals",
@@ -164,14 +174,65 @@
    "label": "Guarantee / Retention Bond %"
   },
   {
+   "collapsible": 1,
    "fieldname": "section_terms",
    "fieldtype": "Section Break",
-   "label": "Payment Terms"
+   "label": "Legal Terms"
   },
   {
    "fieldname": "payment_terms",
    "fieldtype": "Text Editor",
    "label": "Payment Terms"
+  },
+  {
+   "fieldname": "delay_penalty_terms",
+   "fieldtype": "Text Editor",
+   "label": "Delay Penalty Terms"
+  },
+  {
+   "fieldname": "guarantee_terms",
+   "fieldtype": "Text Editor",
+   "label": "Guarantee / Bond Terms"
+  },
+  {
+   "fieldname": "advance_terms",
+   "fieldtype": "Text Editor",
+   "label": "Advance Terms"
+  },
+  {
+   "fieldname": "special_conditions",
+   "fieldtype": "Text Editor",
+   "label": "Special Conditions"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_guarantee_dates",
+   "fieldtype": "Section Break",
+   "label": "Guarantee Dates & Attachments"
+  },
+  {
+   "fieldname": "guarantee_start_date",
+   "fieldtype": "Date",
+   "label": "Guarantee Start Date"
+  },
+  {
+   "fieldname": "guarantee_end_date",
+   "fieldtype": "Date",
+   "label": "Guarantee End Date"
+  },
+  {
+   "fieldname": "column_break_guarantee",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "signed_contract",
+   "fieldtype": "Attach",
+   "label": "Signed Contract"
+  },
+  {
+   "fieldname": "guarantee_document",
+   "fieldtype": "Attach",
+   "label": "Guarantee Document"
   },
   {
    "fieldname": "section_items",
