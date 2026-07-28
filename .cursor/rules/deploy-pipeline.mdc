@@ -1,0 +1,54 @@
+---
+description: Always apply changes via local → GitHub → VPS install pipeline
+alwaysApply: true
+---
+
+# Unisoft deploy pipeline
+
+For **any** feature, fix, theme, or config request that changes the product:
+
+1. **Update local source** in this workspace (`erpnext-develop`).
+2. **Commit and push** to GitHub: `https://github.com/exdeveloper75/erpnext` (`main`).
+3. **Install/deploy on the VPS** so the running site matches GitHub.
+
+Do not stop at local-only or VPS-only patches unless the user explicitly says so.
+
+## Targets
+
+| Step | Location |
+|------|----------|
+| Local | `e:\Projects\GitRepo\Unisoft.eg\erpnext-develop\erpnext-develop` |
+| GitHub | `exdeveloper75/erpnext` → `main` |
+| VPS | `root@191.218.163.10`, stack `/opt/frappe_docker`, project `unisoft`, image `exdeveloper75/erpnext:vps1`, site on port **80** |
+
+## Install source rules
+
+- Build/install from **ERPNext GitHub only** (`exdeveloper75/erpnext`).
+- Do **not** install from `exdeveloper75/frappe` unless the user explicitly asks.
+- Do **not** copy images from the old LAN VM (`192.168.217.142`) for VPS deploys.
+- Prefer rebuilding/redeploying from GitHub over editing files only inside containers. If a quick container patch is needed for urgency, still sync the same change to local + GitHub afterward.
+
+## Deploy pattern (VPS)
+
+- Image build uses official Frappe `develop` + `apps.json` pointing at `exdeveloper75/erpnext` `main`.
+- Compose: `unisoft.env` + `compose.yaml` + mariadb/redis/noproxy + `overrides/compose.create-site-unisoft.yaml`.
+- After code changes: rebuild image tag `exdeveloper75/erpnext:vps1` (or migrate/bench update if volumes already have apps), restart stack, clear cache, verify `http://191.218.163.10/login`.
+
+## Mezan top module dock (do not regress)
+
+The workspace module bar must stay **horizontal on top**, not the default left dock.
+
+Protected assets (always keep in repo and on VPS):
+
+- `erpnext/hooks.py` → `app_include_js` must include `/assets/erpnext/js/mezan_dock_top.js`
+- `erpnext/hooks.py` → `app_include_css` must include `/assets/erpnext/css/mezan_dock_top.css`
+- `erpnext/public/js/mezan_dock_top.js`
+- `erpnext/public/css/mezan_dock_top.css`
+
+**Never** restore/checkout `hooks.py` from an older commit, or deploy a partial `hooks.py`, without preserving those two includes. When deploying Construction or other module tarballs that include `hooks.py`, verify `grep mezan_dock hooks.py` on the VPS after extract. After any hooks change: clear-cache + restart backend/frontend.
+
+## Git habits
+
+- Commit when the user asks for the change to be shipped (push is part of this pipeline).
+- Never force-push `main` unless explicitly requested.
+- Do not commit secrets (`.env`, passwords, tokens).

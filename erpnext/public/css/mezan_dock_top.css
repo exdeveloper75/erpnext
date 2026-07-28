@@ -1,0 +1,286 @@
+/*
+ * Mezan experiment: workspace dock as a top horizontal toolbar.
+ *
+ * ROLLBACK (say "roll back" or do manually):
+ * 1. Remove mezan_dock_top.css / mezan_dock_top.js from erpnext/hooks.py
+ * 2. Remove/undeploy the two asset files from sites/assets/erpnext/
+ * 3. bench --site frontend clear-cache && restart frontend
+ *
+ * Feature flag: body.mezan-top-dock (added once by mezan_dock_top.js)
+ *
+ * Layout uses position:fixed for the dock (NOT CSS grid on body). Grid was causing
+ * flicker because tooltips/menus appended to body became new grid rows on every click.
+ */
+
+body.workspace-dock-active.mezan-top-dock {
+	--mezan-dock-height: 52px;
+	/*
+	 * Desk sticky headers / forms / workspaces use --navbar-height for top offsets.
+	 * Map it to the top dock height so page titles no longer sit under the toolbar.
+	 */
+	--navbar-height: var(--mezan-dock-height);
+	box-sizing: border-box;
+	height: 100vh;
+	overflow: hidden;
+	padding-top: 0;
+}
+
+body.workspace-dock-active.mezan-top-dock > .workspace-dock:not(.hidden) {
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	flex: none !important;
+	width: 100% !important;
+	height: var(--mezan-dock-height) !important;
+	max-height: var(--mezan-dock-height);
+	padding: 0 12px !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: flex-start;
+	gap: 8px;
+	border-right: none !important;
+	border-bottom: 1px solid var(--border-color);
+	z-index: 1021;
+	overflow: visible !important;
+}
+
+/* Push sidebar + content below the fixed dock (no body padding — avoids double gaps) */
+body.workspace-dock-active.mezan-top-dock > .body-sidebar-container,
+body.workspace-dock-active.mezan-top-dock > .main-section {
+	margin-top: var(--mezan-dock-height) !important;
+	height: calc(100vh - var(--mezan-dock-height)) !important;
+	max-height: calc(100vh - var(--mezan-dock-height)) !important;
+	min-height: 0;
+}
+
+body.workspace-dock-active.mezan-top-dock > .main-section {
+	width: auto !important;
+	min-width: 0;
+	flex: 1 1 auto;
+	overflow: auto !important;
+	overflow-x: hidden !important;
+}
+
+/*
+ * Left nav is position:absolute — pin it under the dock so the first item is not covered.
+ * Height matches the visible area so the bottom is not clipped.
+ */
+body.workspace-dock-active.mezan-top-dock .body-sidebar {
+	top: var(--mezan-dock-height) !important;
+	height: calc(100vh - var(--mezan-dock-height)) !important;
+}
+
+/*
+ * Page title was sticky with a transparent theme background, so list/form
+ * rows scrolled visibly behind it. Let the title scroll with the page.
+ */
+body.workspace-dock-active.mezan-top-dock .page-head,
+body.workspace-dock-active.mezan-top-dock .page-head-content,
+body.workspace-dock-active.mezan-top-dock .layout-main-section-wrapper .page-head {
+	position: relative !important;
+	top: auto !important;
+	z-index: auto !important;
+	background: var(--unisoft-surface, var(--bg-color)) !important;
+}
+
+/*
+ * Same issue on Form pages (e.g. User): inner form sidebar + tab strip stay sticky
+ * and page fields scroll behind them. Also covers list side sections.
+ */
+body.workspace-dock-active.mezan-top-dock .layout-side-section,
+body.workspace-dock-active.mezan-top-dock[data-route^="Form"] .layout-side-section,
+body.workspace-dock-active.mezan-top-dock .list-sidebar,
+body.workspace-dock-active.mezan-top-dock .form-sidebar {
+	position: relative !important;
+	top: auto !important;
+	height: auto !important;
+	max-height: none !important;
+	overflow: visible !important;
+}
+
+body.workspace-dock-active.mezan-top-dock .form-tabs-list,
+body.workspace-dock-active.mezan-top-dock .form-tabs-sticky-up,
+body.workspace-dock-active.mezan-top-dock .form-tabs-sticky-down {
+	position: relative !important;
+	top: auto !important;
+	z-index: auto !important;
+}
+
+/* List column header strip that sticks while rows pass behind it */
+body.workspace-dock-active.mezan-top-dock .frappe-list .result > .list-row-container:first-child,
+body.workspace-dock-active.mezan-top-dock .list-row-head {
+	position: relative !important;
+	top: auto !important;
+}
+
+
+body.mezan-top-dock .workspace-dock-logo,
+body.mezan-top-dock .workspace-dock-logo.mezan-dock-logo {
+	height: 100% !important;
+	flex: 0 0 auto;
+	display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+	gap: 10px;
+	min-width: max-content;
+}
+
+/* Icon link stays 28x28; title is a sibling beside it */
+body.mezan-top-dock .workspace-dock-logo a,
+body.mezan-top-dock .workspace-dock-logo a.mezan-dock-brand-link {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 28px !important;
+	height: 28px !important;
+	min-width: 28px;
+	border-radius: 7px;
+	overflow: hidden !important;
+	flex: 0 0 28px;
+	text-decoration: none !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+}
+
+body.mezan-top-dock .workspace-dock-logo a img {
+	width: 28px !important;
+	height: 28px !important;
+	object-fit: contain;
+	border-radius: 7px;
+}
+
+/* Never show a title under/inside the icon */
+body.mezan-top-dock .workspace-dock-logo a .mezan-dock-app-name,
+body.mezan-top-dock .workspace-dock-logo a > span,
+body.mezan-top-dock .workspace-dock-logo a > *:not(img) {
+	display: none !important;
+}
+
+body.mezan-top-dock .workspace-dock-logo > .mezan-dock-app-name {
+	display: inline-block !important;
+	flex: 0 0 auto;
+	font-size: 14px !important;
+	font-weight: 600;
+	line-height: 1 !important;
+	letter-spacing: 0.01em;
+	color: #ffffff !important;
+	white-space: nowrap !important;
+}
+
+body.mezan-top-dock .mezan-dock-app-name-erp {
+	color: #eb6934 !important;
+	font-weight: 700;
+}
+
+/* Duplicate app title in the side menu header sits under the top logo — hide it */
+body.mezan-top-dock.workspace-dock-active .body-sidebar > .sidebar-header {
+	display: none !important;
+}
+
+body.mezan-top-dock .workspace-dock-divider {
+	width: 1px !important;
+	height: 24px !important;
+	margin: 0 4px !important;
+}
+
+body.mezan-top-dock .workspace-dock-logo + .workspace-dock-divider {
+	margin-top: 0 !important;
+}
+
+body.mezan-top-dock .workspace-dock-shortcuts {
+	width: auto !important;
+	flex-direction: row !important;
+	align-items: center;
+	gap: 8px;
+}
+
+body.mezan-top-dock .workspace-dock-items {
+	flex: 1 1 auto !important;
+	width: auto !important;
+	height: 100%;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: flex-start;
+	gap: 10px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: thin;
+}
+
+body.mezan-top-dock .workspace-dock-items::-webkit-scrollbar {
+	display: block;
+	height: 4px;
+}
+
+body.mezan-top-dock .workspace-dock-user {
+	margin-left: auto;
+	flex: 0 0 auto;
+}
+
+/* Active tile: bottom bar instead of left bar */
+body.mezan-top-dock .workspace-dock-item.active::before {
+	left: 50% !important;
+	top: auto !important;
+	bottom: -12px;
+	transform: translateX(-50%) !important;
+	width: 28px !important;
+	height: 4px !important;
+	border-radius: 4px 4px 0 0 !important;
+}
+
+body.mezan-top-dock.sidebar-collapsed .workspace-dock-resize-handle {
+	position: fixed !important;
+	top: var(--mezan-dock-height, 52px) !important;
+	left: 0 !important;
+	right: auto !important;
+	bottom: auto !important;
+	width: 10px !important;
+	height: calc(100vh - var(--mezan-dock-height, 52px)) !important;
+	cursor: e-resize;
+	z-index: 1030;
+	display: block !important;
+}
+
+body.mezan-top-dock.sidebar-collapsed .workspace-dock-resize-handle::after {
+	left: 50% !important;
+	top: 0 !important;
+	transform: translateX(-50%) !important;
+	width: 2px !important;
+	height: 100% !important;
+}
+
+/*
+ * Slide in/out control: keep centered on the sidebar edge in both states.
+ * Default Frappe uses bottom:80px (expanded) and we had top:64px (collapsed).
+ */
+body.mezan-top-dock .body-sidebar .sidebar-toggle-btn,
+body.mezan-top-dock .body-sidebar .collapse-sidebar-link.sidebar-toggle-btn {
+	top: 50% !important;
+	bottom: auto !important;
+	transform: translateY(-50%) !important;
+}
+
+body.mezan-top-dock.sidebar-collapsed .workspace-dock-toggle-btn {
+	position: fixed !important;
+	top: 50% !important;
+	left: 10px !important;
+	right: auto !important;
+	bottom: auto !important;
+	transform: translateY(-50%) !important;
+	display: flex !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	z-index: 1031;
+	background: var(--unisoft-sidebar, var(--surface-sidebar)) !important;
+	border-color: rgba(255, 255, 255, 0.25) !important;
+	color: #fff !important;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+body.mezan-top-dock.sidebar-collapsed .workspace-dock-toggle-btn svg {
+	fill: #fff !important;
+	stroke: #fff !important;
+}

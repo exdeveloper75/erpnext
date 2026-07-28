@@ -23,10 +23,17 @@ add_to_apps_screen = [
 
 develop_version = "17.x.x-develop"
 
-app_include_js = ["erpnext.bundle.js", "/assets/erpnext/js/unisoft_currency.js"]
+app_include_js = [
+	"erpnext.bundle.js",
+	"/assets/erpnext/js/unisoft_currency.js",
+	# Mezan top module dock (REQUIRED — do not remove on Construction deploys)
+	"/assets/erpnext/js/mezan_dock_top.js",
+]
 app_include_css = [
 	"erpnext.bundle.css",
 	"/assets/erpnext/css/unisoft_theme.css",
+	# Mezan top module dock (REQUIRED — do not remove on Construction deploys)
+	"/assets/erpnext/css/mezan_dock_top.css",
 ]
 web_include_css = [
 	"erpnext-web.bundle.css",
