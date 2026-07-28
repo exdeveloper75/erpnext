@@ -125,7 +125,7 @@ def get_project_revenue_snapshot(project=None, contract=None):
 
 
 def get_project_actuals_by_category(project):
-	"""Best-effort actual cost by construction category for a project."""
+	"""Actual cost by construction category for a project."""
 	actuals = {
 		"Materials": 0.0,
 		"Labor": 0.0,
@@ -137,19 +137,17 @@ def get_project_actuals_by_category(project):
 	if not project:
 		return actuals
 
-	# Materials: stock consumed + purchase cost on project
 	proj = frappe.db.get_value(
 		"Project",
 		project,
-		["total_consumed_material_cost", "total_purchase_cost"],
+		["total_consumed_material_cost", "total_purchase_cost", "total_costing_amount"],
 		as_dict=True,
 	) or {}
 	actuals["Materials"] = flt(proj.get("total_consumed_material_cost")) or flt(
 		proj.get("total_purchase_cost")
 	)
 
-	# Labor: timesheet costing
-	actuals["Labor"] = flt(
+	timesheet_labor = flt(
 		frappe.db.sql(
 			"""
 			select sum(total_costing_amount)
@@ -159,19 +157,101 @@ def get_project_actuals_by_category(project):
 			project,
 		)[0][0]
 	)
+	labor_entries = 0.0
+	if frappe.db.exists("DocType", "Construction Labor Cost"):
+		labor_entries = flt(
+			frappe.db.sql(
+				"""
+				select sum(amount) from `tabConstruction Labor Cost`
+				where project=%s and docstatus=1
+				""",
+				project,
+			)[0][0]
+		)
+	actuals["Labor"] = timesheet_labor + labor_entries
 
-	# Subcontract: approved contractor certificates
+	if frappe.db.exists("DocType", "Construction Equipment Cost"):
+		actuals["Equipment"] = flt(
+			frappe.db.sql(
+				"""
+				select sum(amount) from `tabConstruction Equipment Cost`
+				where project=%s and docstatus=1
+				""",
+				project,
+			)[0][0]
+		)
+
 	actuals["Subcontract"] = get_previous_certified_amount(
 		"Contractor Payment Certificate", project=project
 	)
 
-	# Equipment + Expenses: expense claims / journal not always project-linked;
-	# use Purchase Invoice grand_total not already counted is hard — approximate via
-	# Project total_costing_amount residual into Expenses when positive.
-	total_costing = flt(frappe.db.get_value("Project", project, "total_costing_amount"))
-	assigned = actuals["Materials"] + actuals["Labor"] + actuals["Subcontract"]
-	residual = max(total_costing - assigned, 0.0)
+	assigned = (
+		actuals["Materials"]
+		+ actuals["Labor"]
+		+ actuals["Equipment"]
+		+ actuals["Subcontract"]
+	)
+	residual = max(flt(proj.get("total_costing_amount")) - assigned, 0.0)
 	actuals["Expenses"] = residual
 
 	return actuals
 
+
+def get_prior_certificate_qty(doctype, contract, description, rate, exclude=None):
+	"""Sum previous current_qty on certificate items matched by description + rate."""
+	if not contract:
+		return 0.0
+
+	parent_filters = {"docstatus": 1, "construction_contract": contract}
+	if exclude:
+		parent_filters["name"] = ["!=", exclude]
+	parents = frappe.get_all(doctype, filters=parent_filters, pluck="name")
+	if not parents:
+		return 0.0
+
+	total = 0.0
+	for row in frappe.get_all(
+		"Payment Certificate Item",
+		filters={"parent": ["in", parents], "parenttype": doctype},
+		fields=["description", "rate", "current_qty"],
+	):
+		if (row.description or "").strip() == (description or "").strip() and flt(row.rate) == flt(
+			rate
+		):
+			total += flt(row.current_qty)
+	return total
+
+
+@frappe.whitelist()
+def get_contract_boq_items(contract, certificate_doctype=None, exclude=None):
+	"""Return BOQ lines from Construction Contract with previous qty for certificates."""
+	if not contract:
+		return []
+
+	items = frappe.get_all(
+		"Construction Contract Item",
+		filters={"parent": contract},
+		fields=["description", "uom", "qty", "rate", "idx"],
+		order_by="idx asc",
+	)
+	certificate_doctype = certificate_doctype or "Customer Payment Certificate"
+	rows = []
+	for item in items:
+		previous_qty = get_prior_certificate_qty(
+			certificate_doctype,
+			contract,
+			item.description,
+			item.rate,
+			exclude=exclude,
+		)
+		rows.append(
+			{
+				"description": item.description,
+				"uom": item.uom,
+				"contract_qty": item.qty,
+				"previous_qty": previous_qty,
+				"current_qty": 0,
+				"rate": item.rate,
+			}
+		)
+	return rows

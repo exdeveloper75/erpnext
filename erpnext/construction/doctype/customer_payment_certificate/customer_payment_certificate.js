@@ -1,5 +1,21 @@
 frappe.ui.form.on("Customer Payment Certificate", {
 	refresh(frm) {
+		if (frm.doc.docstatus === 0 && frm.doc.construction_contract) {
+			frm.add_custom_button(__("Get Items from Contract"), () => {
+				frappe.call({
+					method: "get_items_from_contract",
+					doc: frm.doc,
+					freeze: true,
+					callback(r) {
+						frm.refresh_fields();
+						frappe.show_alert({
+							message: __("Loaded {0} BOQ line(s)", [r.message || 0]),
+							indicator: "green",
+						});
+					},
+				});
+			});
+		}
 		if (frm.doc.docstatus === 1 && frm.doc.status === "Submitted") {
 			frm.add_custom_button(__("Mark Approved"), () => {
 				frappe.call({
@@ -45,6 +61,9 @@ frappe.ui.form.on("Customer Payment Certificate", {
 	advance_recovery(frm) {
 		frm.trigger("calculate_totals");
 	},
+	retention_release(frm) {
+		frm.trigger("calculate_totals");
+	},
 	calculate_totals(frm) {
 		let gross = 0;
 		(frm.doc.items || []).forEach((row) => {
@@ -53,7 +72,8 @@ frappe.ui.form.on("Customer Payment Certificate", {
 			gross += flt(row.current_amount);
 		});
 		const retention = (gross * flt(frm.doc.retention_percent)) / 100;
-		const claimed = gross - retention - flt(frm.doc.advance_recovery);
+		const claimed =
+			gross - retention - flt(frm.doc.advance_recovery) + flt(frm.doc.retention_release);
 		frm.set_value("gross_amount", gross);
 		frm.set_value("retention_amount", retention);
 		frm.set_value("claimed_amount", claimed);

@@ -19,7 +19,44 @@ Do not stop at local-only or VPS-only patches unless the user explicitly says so
 |------|----------|
 | Local | `e:\Projects\GitRepo\Unisoft.eg\erpnext-develop\erpnext-develop` |
 | GitHub | `exdeveloper75/erpnext` → `main` |
-| VPS | `root@191.218.163.10`, stack `/opt/frappe_docker`, project `unisoft`, image `exdeveloper75/erpnext:vps1`, site on port **80** |
+| VPS | `root@191.218.163.10`, stack `/opt/frappe_docker`, project `unisoft`, image `exdeveloper75/erpnext:vps1` |
+| Public URL | **https://demo.mezanerp.com** (Let's Encrypt via Traefik) |
+
+## HTTPS / Traefik (do not regress)
+
+Production stack uses **HTTPS**, not `compose.noproxy.yaml`.
+
+Compose files (always):
+
+- `compose.yaml`
+- `overrides/compose.mariadb.yaml`
+- `overrides/compose.redis.yaml`
+- `overrides/compose.https.yaml`  ← required (ports 80+443, ACME)
+- `overrides/compose.create-site-unisoft.yaml`
+
+`unisoft.env` must keep:
+
+- `SITES_RULE=Host(\`demo.mezanerp.com\`)`
+- `LETSENCRYPT_EMAIL=admin@mezanerp.com`
+- `HTTPS_PUBLISH_PORT=443`
+- `FRAPPE_SITE_NAME_HEADER=frontend`
+- site `host_name` = `https://demo.mezanerp.com`
+
+**Never** switch back to `compose.noproxy.yaml` for this VPS unless the user asks. After stack recreate, verify `https://demo.mezanerp.com/login` returns 200.
+
+After any `frontend`/`backend` **container recreate**, re-copy Mezan static assets into **both** containers (image layers are separate; `sites/assets` often symlinks to each container’s own `/assets`):
+
+- `erpnext/public/images/mezan-*.svg`
+- `erpnext/public/css/unisoft_*.css`, `mezan_dock_top.css`
+- `erpnext/public/js/unisoft_*.js`, `mezan_dock_top.js`
+- `erpnext/hooks.py` (dock + branding includes)
+
+Then `bench --site frontend clear-cache` and confirm:
+
+- `https://demo.mezanerp.com/assets/erpnext/images/mezan-logo.svg` → 200
+- `https://demo.mezanerp.com/assets/erpnext/css/unisoft_login.css` → 200
+
+Long-term: rebuild `exdeveloper75/erpnext:vps1` from GitHub `main` so recreates include these files.
 
 ## Install source rules
 

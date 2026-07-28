@@ -386,6 +386,17 @@
    "type": "Link"
   },
   {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "تكلفة المعدات",
+   "link_to": "Construction Equipment Cost",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
    "child": 0,
    "collapsible": 1,
    "icon": "user",
@@ -414,6 +425,17 @@
    "keep_closed": 0,
    "label": "المقاولون باليومية",
    "link_to": "Timesheet",
+   "link_type": "DocType",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 1,
+   "collapsible": 1,
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "تكلفة العمالة",
+   "link_to": "Construction Labor Cost",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"
@@ -483,6 +505,30 @@
    "label": "التقارير",
    "link_to": "Financial Reports",
    "link_type": "Workspace",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "pie-chart",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "أرباح وخسائر المشاريع",
+   "link_to": "Project Construction P and L",
+   "link_type": "Report",
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "child": 0,
+   "collapsible": 1,
+   "icon": "users",
+   "indent": 0,
+   "keep_closed": 0,
+   "label": "ملخص مقاولات العملاء",
+   "link_to": "Customer Construction Summary",
+   "link_type": "Report",
    "show_arrow": 0,
    "type": "Link"
   },

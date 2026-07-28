@@ -8,6 +8,20 @@ frappe.ui.form.on("Project", {
 			__("Construction")
 		);
 		frm.add_custom_button(
+			__("Labor Costs"),
+			() => {
+				frappe.set_route("List", "Construction Labor Cost", { project: frm.doc.name });
+			},
+			__("Construction")
+		);
+		frm.add_custom_button(
+			__("Equipment Costs"),
+			() => {
+				frappe.set_route("List", "Construction Equipment Cost", { project: frm.doc.name });
+			},
+			__("Construction")
+		);
+		frm.add_custom_button(
 			__("Contracts"),
 			() => {
 				frappe.set_route("List", "Construction Contract", { project: frm.doc.name });
@@ -32,6 +46,16 @@ frappe.ui.form.on("Project", {
 			__("Change Orders"),
 			() => {
 				frappe.set_route("List", "Change Order", { project: frm.doc.name });
+			},
+			__("Construction")
+		);
+		frm.add_custom_button(
+			__("Construction P&L"),
+			() => {
+				frappe.set_route("query-report", "Project Construction P and L", {
+					company: frm.doc.company,
+					project: frm.doc.name,
+				});
 			},
 			__("Construction")
 		);

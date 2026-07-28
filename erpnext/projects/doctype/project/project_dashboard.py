@@ -20,6 +20,8 @@ def get_data():
 				"items": [
 					"Construction Contract",
 					"Construction Project Budget",
+					"Construction Labor Cost",
+					"Construction Equipment Cost",
 					"Change Order",
 					"Customer Payment Certificate",
 					"Contractor Payment Certificate",

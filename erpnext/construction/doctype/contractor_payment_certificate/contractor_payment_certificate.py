@@ -5,7 +5,11 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import flt
 
-from erpnext.construction.utils import get_invoice_collection, get_previous_certified_amount
+from erpnext.construction.utils import (
+	get_contract_boq_items,
+	get_invoice_collection,
+	get_previous_certified_amount,
+)
 
 
 class ContractorPaymentCertificate(Document):
@@ -31,7 +35,12 @@ class ContractorPaymentCertificate(Document):
 
 		self.gross_amount = gross
 		self.retention_amount = flt(gross) * flt(self.retention_percent) / 100.0
-		self.claimed_amount = flt(gross) - flt(self.retention_amount) - flt(self.advance_recovery)
+		self.claimed_amount = (
+			flt(gross)
+			- flt(self.retention_amount)
+			- flt(self.advance_recovery)
+			+ flt(self.retention_release)
+		)
 		if not flt(self.approved_amount):
 			self.approved_amount = self.claimed_amount
 
@@ -46,6 +55,21 @@ class ContractorPaymentCertificate(Document):
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
+
+	@frappe.whitelist()
+	def get_items_from_contract(self):
+		if not self.construction_contract:
+			frappe.throw(frappe._("Select a Construction Contract first"))
+		rows = get_contract_boq_items(
+			self.construction_contract,
+			certificate_doctype="Contractor Payment Certificate",
+			exclude=self.name,
+		)
+		self.set("items", [])
+		for row in rows:
+			self.append("items", row)
+		self.calculate_totals()
+		return len(rows)
 
 	@frappe.whitelist()
 	def mark_approved(self):
