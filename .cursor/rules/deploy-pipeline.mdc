@@ -58,6 +58,17 @@ Then `bench --site frontend clear-cache` and confirm:
 
 Long-term: rebuild `exdeveloper75/erpnext:vps1` from GitHub `main` so recreates include these files.
 
+## Installed apps on demo VPS
+
+Required apps on `frontend` site (do not drop):
+
+- `frappe`
+- `erpnext` (Mezan fork `exdeveloper75/erpnext`)
+- `hrms` (attendance / leave / payroll)
+- `payments`
+
+`/opt/frappe_docker/apps.json` must list erpnext + hrms + payments for future image rebuilds. After installing new apps into a running container, `docker commit` into `exdeveloper75/erpnext:vps1` (or rebuild) so recreates keep them.
+
 ## Install source rules
 
 - Build/install from **ERPNext GitHub only** (`exdeveloper75/erpnext`).
