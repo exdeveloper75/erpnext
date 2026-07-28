@@ -31,3 +31,24 @@ class ConstructionContract(Document):
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
+
+	@frappe.whitelist()
+	def create_project(self):
+		"""Create Project from contract (عقد أولاً ثم مشروع)."""
+		if self.project:
+			frappe.throw(frappe._("Project {0} is already linked").format(self.project))
+		if self.docstatus != 1:
+			frappe.throw(frappe._("Submit the contract before creating a project"))
+		if self.contract_type != "Customer":
+			frappe.throw(frappe._("Create Project is only for Customer contracts"))
+
+		project = frappe.new_doc("Project")
+		project.project_name = self.title
+		project.company = self.company
+		project.customer = self.party
+		project.expected_start_date = self.start_date
+		project.expected_end_date = self.end_date
+		project.insert()
+
+		self.db_set("project", project.name)
+		return project.name

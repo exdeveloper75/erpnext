@@ -1,5 +1,17 @@
 frappe.ui.form.on("Contractor Payment Certificate", {
 	refresh(frm) {
+		if (frm.doc.docstatus === 1 && frm.doc.status === "Submitted") {
+			frm.add_custom_button(__("Mark Approved"), () => {
+				frappe.call({
+					method: "mark_approved",
+					doc: frm.doc,
+					freeze: true,
+					callback() {
+						frm.reload_doc();
+					},
+				});
+			});
+		}
 		if (frm.doc.docstatus === 1 && !frm.doc.purchase_invoice) {
 			frm.add_custom_button(__("Create Purchase Invoice"), () => {
 				frappe.call({
@@ -21,6 +33,12 @@ frappe.ui.form.on("Contractor Payment Certificate", {
 			});
 		}
 	},
+	construction_contract(frm) {
+		frm.trigger("calculate_totals");
+	},
+	project(frm) {
+		frm.trigger("calculate_totals");
+	},
 	retention_percent(frm) {
 		frm.trigger("calculate_totals");
 	},
@@ -34,12 +52,14 @@ frappe.ui.form.on("Contractor Payment Certificate", {
 			row.current_amount = flt(row.current_qty) * flt(row.rate);
 			gross += flt(row.current_amount);
 		});
+		const retention = (gross * flt(frm.doc.retention_percent)) / 100;
+		const claimed = gross - retention - flt(frm.doc.advance_recovery);
 		frm.set_value("gross_amount", gross);
-		frm.set_value("retention_amount", (gross * flt(frm.doc.retention_percent)) / 100);
-		frm.set_value(
-			"net_amount",
-			gross - flt(frm.doc.retention_amount) - flt(frm.doc.advance_recovery)
-		);
+		frm.set_value("retention_amount", retention);
+		frm.set_value("claimed_amount", claimed);
+		if (!flt(frm.doc.approved_amount)) {
+			frm.set_value("approved_amount", claimed);
+		}
 		frm.refresh_field("items");
 	},
 });

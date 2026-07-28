@@ -22,12 +22,18 @@
   "section_items",
   "items",
   "section_amounts",
+  "previous_certified_amount",
   "gross_amount",
   "retention_percent",
   "retention_amount",
   "column_break_amounts",
   "advance_recovery",
-  "net_amount",
+  "claimed_amount",
+  "approved_amount",
+  "section_collection",
+  "collected_amount",
+  "outstanding_amount",
+  "collection_status",
   "section_invoice",
   "sales_invoice",
   "amended_from"
@@ -104,7 +110,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Draft\nSubmitted\nInvoiced\nCancelled",
+   "options": "Draft\nSubmitted\nApproved\nInvoiced\nCancelled",
    "reqd": 1
   },
   {
@@ -143,9 +149,18 @@
    "label": "Amounts"
   },
   {
+   "default": "0",
+   "description": "Sum of previously approved certificates for this contract/project",
+   "fieldname": "previous_certified_amount",
+   "fieldtype": "Currency",
+   "label": "Previous Certified Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
    "fieldname": "gross_amount",
    "fieldtype": "Currency",
-   "label": "Gross Amount",
+   "label": "Gross Amount (This Period)",
    "options": "currency",
    "read_only": 1
   },
@@ -174,10 +189,50 @@
    "options": "currency"
   },
   {
-   "fieldname": "net_amount",
+   "description": "Gross - Retention - Advance Recovery",
+   "fieldname": "claimed_amount",
    "fieldtype": "Currency",
-   "label": "Net Amount",
+   "label": "Claimed Amount",
    "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Amount approved by the client (may be less than claimed)",
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "label": "Approved Amount",
+   "options": "currency"
+  },
+  {
+   "fieldname": "section_collection",
+   "fieldtype": "Section Break",
+   "label": "Collection"
+  },
+  {
+   "default": "0",
+   "fieldname": "collected_amount",
+   "fieldtype": "Currency",
+   "label": "Collected Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "Not Invoiced",
+   "fieldname": "collection_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Collection Status",
+   "options": "Not Invoiced\nUnpaid\nPartially Paid\nPaid",
    "read_only": 1
   },
   {

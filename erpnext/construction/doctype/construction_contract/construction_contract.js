@@ -1,4 +1,26 @@
 frappe.ui.form.on("Construction Contract", {
+	refresh(frm) {
+		if (frm.doc.docstatus === 1 && !frm.doc.project && frm.doc.contract_type === "Customer") {
+			frm.add_custom_button(__("Create Project"), () => {
+				frappe.call({
+					method: "create_project",
+					doc: frm.doc,
+					freeze: true,
+					callback(r) {
+						if (r.message) {
+							frm.reload_doc();
+							frappe.set_route("Form", "Project", r.message);
+						}
+					},
+				});
+			}).addClass("btn-primary");
+		}
+		if (frm.doc.project) {
+			frm.add_custom_button(__("Project"), () => {
+				frappe.set_route("Form", "Project", frm.doc.project);
+			});
+		}
+	},
 	contract_type(frm) {
 		frm.set_value(
 			"party_type",

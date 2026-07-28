@@ -24,6 +24,10 @@
   "contract_value",
   "retention_percent",
   "advance_percent",
+  "delay_penalty_percent",
+  "guarantee_percent",
+  "section_terms",
+  "payment_terms",
   "section_items",
   "items",
   "section_totals",
@@ -77,13 +81,13 @@
    "fieldtype": "Column Break"
   },
   {
+   "description": "Optional. Create the contract first, then use Create Project.",
    "fieldname": "project",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Project",
-   "options": "Project",
-   "reqd": 1
+   "options": "Project"
   },
   {
    "fieldname": "company",
@@ -146,6 +150,28 @@
    "fieldname": "advance_percent",
    "fieldtype": "Percent",
    "label": "Advance %"
+  },
+  {
+   "default": "0",
+   "fieldname": "delay_penalty_percent",
+   "fieldtype": "Percent",
+   "label": "Delay Penalty %"
+  },
+  {
+   "default": "0",
+   "fieldname": "guarantee_percent",
+   "fieldtype": "Percent",
+   "label": "Guarantee / Retention Bond %"
+  },
+  {
+   "fieldname": "section_terms",
+   "fieldtype": "Section Break",
+   "label": "Payment Terms"
+  },
+  {
+   "fieldname": "payment_terms",
+   "fieldtype": "Text Editor",
+   "label": "Payment Terms"
   },
   {
    "fieldname": "section_items",
