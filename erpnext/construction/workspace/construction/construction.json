@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Projects & Contracts",
-   "link_count": 3,
+   "link_count": 4,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -39,6 +39,17 @@
    "label": "Construction Contract",
    "link_count": 0,
    "link_to": "Construction Contract",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Construction Project Budget",
+   "link_count": 0,
+   "link_to": "Construction Project Budget",
    "link_type": "DocType",
    "onboard": 1,
    "type": "Link"

@@ -15,5 +15,15 @@ def get_data():
 			{"label": _("Sales"), "items": ["Sales Order", "Delivery Note", "Sales Invoice"]},
 			{"label": _("Purchase"), "items": ["Purchase Order", "Purchase Receipt", "Purchase Invoice"]},
 			{"label": _("Manufacture"), "items": ["Work Order"]},
+			{
+				"label": _("Construction"),
+				"items": [
+					"Construction Contract",
+					"Construction Project Budget",
+					"Change Order",
+					"Customer Payment Certificate",
+					"Contractor Payment Certificate",
+				],
+			},
 		],
 	}

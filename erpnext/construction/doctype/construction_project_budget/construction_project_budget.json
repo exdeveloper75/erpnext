@@ -1,0 +1,265 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-28 18:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "title",
+  "project",
+  "construction_contract",
+  "column_break_main",
+  "company",
+  "posting_date",
+  "status",
+  "currency",
+  "section_revenue",
+  "contract_value",
+  "certified_amount",
+  "collected_amount",
+  "column_break_revenue",
+  "outstanding_receivable",
+  "estimated_profit",
+  "section_budget",
+  "items",
+  "section_totals",
+  "total_budget",
+  "total_actual",
+  "column_break_totals",
+  "budget_variance",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CPB-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "fieldname": "construction_contract",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Construction Contract",
+   "options": "Construction Contract"
+  },
+  {
+   "fieldname": "column_break_main",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nActive\nClosed\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_revenue",
+   "fieldtype": "Section Break",
+   "label": "Revenue Snapshot"
+  },
+  {
+   "default": "0",
+   "description": "From linked Construction Contract (or Project estimated costing)",
+   "fieldname": "contract_value",
+   "fieldtype": "Currency",
+   "label": "Contract Value",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Sum of approved Customer Payment Certificates",
+   "fieldname": "certified_amount",
+   "fieldtype": "Currency",
+   "label": "Certified to Date",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "collected_amount",
+   "fieldtype": "Currency",
+   "label": "Collected to Date",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_revenue",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "outstanding_receivable",
+   "fieldtype": "Currency",
+   "label": "Outstanding Receivable",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Contract Value - Total Actual Cost",
+   "fieldname": "estimated_profit",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Estimated Profit",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_budget",
+   "fieldtype": "Section Break",
+   "label": "Budget by Cost Category"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Budget Lines",
+   "options": "Construction Project Budget Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_budget",
+   "fieldtype": "Currency",
+   "label": "Total Budget",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_actual",
+   "fieldtype": "Currency",
+   "label": "Total Actual",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_totals",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "budget_variance",
+   "fieldtype": "Currency",
+   "label": "Budget Variance",
+   "options": "currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Construction Project Budget",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-07-28 18:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Construction",
+ "name": "Construction Project Budget",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}
